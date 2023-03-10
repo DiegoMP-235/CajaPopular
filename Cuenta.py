@@ -1,9 +1,13 @@
+import random 
 class Cuenta:
     def __init__(self,numeroCuenta,titular,edad,saldo=0):
         self.__numeroCuenta = numeroCuenta
         self.__titular = titular
         self.__edad = edad
         self.__saldo = saldo
+
+    def generaNumeroCuenta(self):
+        
     #GETTERS    
     def getNumeroCuenta(self):
         return self.__numeroCuenta
