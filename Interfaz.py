@@ -1,6 +1,7 @@
 from tkinter import Tk,Frame,Label,Entry,Button,Grid
 from Cuenta import *
 from Prompt import *
+from DepositaACuenta import *
 
 def salir():
     ventana.quit()
@@ -10,14 +11,29 @@ def guardarDinero():
     miPrompt.mostrarPrompt("Guardar dinero","Ingresa la cantidad a guardar","Depositar")
     dineroahorrar = miPrompt.getText()
     miPrompt.cierraPrompt()
-    print("Ahorrar:",dineroahorrar)
+    miCuenta.agregaEfectivo(float(dineroahorrar))
+    actualizaDatos()
 
 def retirarDinero():    
     miPrompt = Prompt(ventana)
     miPrompt.mostrarPrompt("Retirar dinero","Ingresa la cantidad a retirar","Retirar")
     dineroretirar = miPrompt.getText()
     miPrompt.cierraPrompt()
-    print("Retirar:",dineroretirar)
+    miCuenta.retiraEfectivo(float(dineroretirar))
+    actualizaDatos()
+
+def actualizaDatos():
+    LblSaldoTotal.config(text=miCuenta.getSaldo())
+
+def depositoACuenta():
+    depositar = DepositoACuenta(ventana,"Numero cuenta:","Monto a depositar:")  
+    depositar.mostrarPrompt("Deposito")
+    CuentaADepositar = depositar.getNumeroCuenta()  
+    MontoDepo = depositar.getMontoDepositar()
+    depositar.cierraPrompt()
+    miCuenta.retiraEfectivo(float(MontoDepo))
+    actualizaDatos()
+    #print("Numero cuenta:",CuentaADepositar,"\nMonto:",MontoDepo)
     
 miCuenta = Cuenta("Diego MP",20,235)
 ventana = Tk()
@@ -48,7 +64,7 @@ LblNumEdad = Label(FrameInfoCuenta,text="[edad]")
 LblEdad.grid(row=2,column=0)
 LblNumEdad.grid(row=2,column=1)
 
-LblSaldo = Label(FrameInfoCuenta,text="saldo:")
+LblSaldo = Label(FrameInfoCuenta,text="Saldo:")
 LblSaldoTotal = Label(FrameInfoCuenta,text="[money]")
 LblSaldo.grid(row=3,column=0)
 LblSaldoTotal.grid(row=3,column=1)
@@ -56,7 +72,7 @@ LblSaldoTotal.grid(row=3,column=1)
 #Botones con las opciones
 btnIngresarEfectivo = Button(FrameBtnOperations,text="Ahorrar",command=guardarDinero)
 btnRetirarEfectivo = Button(FrameBtnOperations,text="Retirar",command=retirarDinero)
-btnDepositoACuenta = Button(FrameBtnOperations,text="Depositar a otra cuenta")
+btnDepositoACuenta = Button(FrameBtnOperations,text="Depositar a otra cuenta",command=depositoACuenta)
 btnSalir = Button(FrameBtnOperations,text="Salir",command=salir)
 
 btnIngresarEfectivo.grid(row=0,column=0)
