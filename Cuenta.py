@@ -1,12 +1,13 @@
 import random 
 class Cuenta:
     def __init__(self,titular,edad,saldo=0):
-        self.__numeroCuenta = self.generaNumeroCuenta()
+        #self.__numeroCuenta = self.__generaNumeroCuenta()
+        self.__numeroCuenta = "C3378455606"
         self.__titular = titular
         self.__edad = edad
         self.__saldo = saldo
 
-    def generaNumeroCuenta(self):
+    def __generaNumeroCuenta(self):
         longitud = 10
         NumeroCuenta = "C"
         for i in range(0,longitud):
@@ -42,7 +43,7 @@ class Cuenta:
         
         
     def retiraEfectivo(self,Monto):
-        self.__saldo =- Monto
+        self.__saldo = self.__saldo - Monto
         
     def agregaEfectivo(self,Monto):
-        self.__saldo =+ Monto    
+        self.__saldo = self.__saldo + Monto    
