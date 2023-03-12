@@ -13,7 +13,9 @@ class Prompt:
         #ventana = Tk()
         ventana = Toplevel(NodoPadre)
         ventana.title("Entrada")
-        ventana.geometry("220x85")
+        ancho_pantalla = ventana.winfo_screenwidth()
+        alto_pantalla = ventana.winfo_screenheight()
+        ventana.geometry(f"220x85+{ancho_pantalla//2-30}+{alto_pantalla//2-50}")
         ventana.resizable(False,False)
         return ventana
     
@@ -42,7 +44,7 @@ class Prompt:
         
     def __creaBotonGuardar(self):#Instancia el boton para guardar el texto
         boton_guardar = Button(self.__ventana,text="Guardar",command=self.__guardar_texto)    
-        boton_guardar.pack()     
+        boton_guardar.pack(pady=7)     
         return boton_guardar
         
     #El 1er arg. corresponde a el titulo
