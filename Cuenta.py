@@ -1,13 +1,19 @@
 import random 
 class Cuenta:
-    def __init__(self,numeroCuenta,titular,edad,saldo=0):
-        self.__numeroCuenta = numeroCuenta
+    def __init__(self,titular,edad,saldo=0):
+        self.__numeroCuenta = self.generaNumeroCuenta()
         self.__titular = titular
         self.__edad = edad
         self.__saldo = saldo
 
     def generaNumeroCuenta(self):
-        
+        longitud = 10
+        NumeroCuenta = "C"
+        for i in range(0,longitud):
+            NumeroCuenta +=  str(random.randint(0,9))
+            
+        return NumeroCuenta    
+            
     #GETTERS    
     def getNumeroCuenta(self):
         return self.__numeroCuenta
@@ -16,7 +22,7 @@ class Cuenta:
         return self.__titular    
 
     def getEdad(self):
-        return self.__titular    
+        return self.__edad    
     
     def getSaldo(self):
         return self.__saldo    
@@ -33,3 +39,10 @@ class Cuenta:
         
     def setSaldo(self,Saldo):
         self.__saldo = Saldo    
+        
+        
+    def retiraEfectivo(self,Monto):
+        self.__saldo =- Monto
+        
+    def agregaEfectivo(self,Monto):
+        self.__saldo =+ Monto    
